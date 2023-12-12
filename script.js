@@ -14,7 +14,6 @@ sign_up_btn.addEventListener('click', () => {
         const password = signUpForm.querySelector('input[type="password"]').value;
 
         saveUser({ username, email, password });
-
     });
 });
 
@@ -32,24 +31,23 @@ sign_in_btn.addEventListener('click', () => {
 
         if (isAuthenticated) {
             console.log("User authenticated!");
+            location.replace('home.html');
+
         } else {
             console.log("Authentication failed. Invalid username or password.");
         }
     });
 });
 
+
 function saveUser(user) {
     const users = JSON.parse(localStorage.getItem('users')) || [];
-
     users.push(user);
-
     localStorage.setItem('users', JSON.stringify(users));
 }
 
 function authenticateUser(credentials) {
     const users = JSON.parse(localStorage.getItem('users')) || [];
-
     const foundUser = users.find(user => user.username === credentials.username && user.password === credentials.password);
-
     return !!foundUser;
 }
